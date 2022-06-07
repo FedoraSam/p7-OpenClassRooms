@@ -3,7 +3,7 @@
         <div v-on:click="consultArticle" class="top-articles--list__article"> 
             <span class="number">{{totalLikes}}</span>
             <img class="img-top" v-bind:src="url" v-bind:alt="title"> 
-            <span>{{title}}</span> 
+            <span class="top-title">{{title}}</span> 
         </div>
     </div>
 </template>
@@ -65,13 +65,21 @@ export default {
 }
 .img-top{
     width: 35px;
+    min-width: 35px;
     height: 35px;
+    min-height: 35px;
     border-radius: 35px;
     margin: 5px 20px;
 }
+.top-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .number{
     width: 35px;
+    min-width: 35px;
     height: 35px;
+    min-height: 35px;
     border-radius: 35px;
     border: 1px solid rgb(173, 97, 97);
     color: rgb(0, 0, 0);

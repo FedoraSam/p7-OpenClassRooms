@@ -9,6 +9,7 @@
             <p v-show="checkedLastName == false" class="regex-advert">Veuillez utiliser uniquement des caractères alphabétiques pour votre prénom </p>
             <label for="email" v-show="changePassword == false">Votre email</label>
             <input type="email" placeholder="adresse mail" v-model="email" v-show="changePassword == false">
+            <p v-show="checkedEmail == false" class="regex-advert">Veuillez utiliser une adresse mail valable</p>
             <p class="signup" v-show="changePassword == false" v-on:click.prevent="modeChangePassword">Changer votre mot de passe</p>
             <p class="signup" v-show="changePassword == true" v-on:click.prevent="modeChangePassword">Annuler</p>
             <label v-show="changePassword == true" for="old-password">Confirmer votre ancien mot de passe </label>
@@ -61,6 +62,7 @@ export default {
             password: '',
             checkedLastName: true,
             checkedFirstName: true,
+            checkedEmail: true,
             errorPassword: ""
         }
     },
@@ -87,14 +89,19 @@ export default {
 
 
         modifyAccount: function(){
+            this.checkedLastName = true
+            this.checkedFirstName = true
+            this.checkedEmail = true
             if(!this.lastName.match(/^([a-zzáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœA-ZÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s]+)$/)){
                 this.checkedLastName = false
             }
             if(!this.firstName.match(/^([a-zzáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœA-ZÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s]+)$/)){
-                console.log("regex non respectée")
                 this.checkedFirstName = false
             }
-            else{      
+            if(!this.email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+                this.checkedEmail = false
+            }
+            else if(this.checkedFirstName == true && this.checkedLastName == true && this.checkedEmail == true){      
                 axios
                 .put(`https://backend.thiery-samuel.com/api/users/${this.userLogged}`,{
                     newFirstName: this.firstName,
@@ -105,7 +112,10 @@ export default {
                     Authorization: 'Bearer '+ localStorage.getItem('token')
                     }
                 })
-                .then(res => console.log(res))
+                .then(window.alert('Votre compte a été modifié'))
+                .catch(err =>{
+                    window.alert('navré impossible de modifier votre profil, veuillez réessayer dans un instant')
+                })
             }    
         },
 
@@ -124,9 +134,11 @@ export default {
                 })
             .then(res => {
                 this.errorPassword = ""
+                window.alert('mot de passe modifié avec succès')
             })
             .catch(err =>{
                 this.errorPassword = err.response.data.message
+                window.alert('veuillez réessayer plus tard')
             })
         }
     },

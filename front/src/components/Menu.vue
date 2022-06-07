@@ -1,10 +1,10 @@
 <template>
   <nav>
       <img src="../images/icon.png" alt="logo groupomania" id="logo" v-on:click="goHome">
-      <i class="fas fa-bars" v-on:click="revealMenu"></i>
+      <i class="fas fa-bars" @click="revealMenu" ></i>
       <i class="fas fa-caret-square-up" v-on:click="goToTopUpPage"></i>
       <div v-show="hide==false" id="menu">
-          <ul>
+          <ul @mouseout="revealMenu">
               <li v-on:click="goHome">Accueil</li>
               <li v-on:click="goAccount">Mon compte</li>
               <li v-on:click="returnToAuthentificationPage">Connexion</li>
@@ -29,6 +29,7 @@ export default {
         revealMenu: function(){
             this.hide = !this.hide
         },
+        
         goToTopUpPage: function(){
             window.top.window.scrollTo(0,0)
         },

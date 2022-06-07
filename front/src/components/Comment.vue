@@ -2,7 +2,7 @@
   <transition name="comment">
     <div class="articles--commentaires "  >
         <i class="fas fa-window-close" @click="$emit('closeComment')" title="Fermer la fenêtre"></i>
-        <textarea class="maincontainer--article__comments" placeholder="votre commentaire"  v-model="commentToPost"></textarea> 
+        <textarea maxlength="250" class="maincontainer--article__comments" placeholder="votre commentaire"  v-model="commentToPost"></textarea> 
         <p class="regex-advert" v-show="checkedcomment == false">Merci de ne pas utiliser de caractères spéciaux, utiliser uniquement des chiffres lettre ainsi que les signes de ponctuation</p>
         <button v-if="commentToPost" class="maincontainer--article__button" v-on:click.prevent="postComment()" >Valider</button>
     </div>
@@ -25,7 +25,7 @@ export default {
     },
     methods:{ 
         postComment: function(){
-          if(!this.commentToPost.match(/^([a-zzáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœA-ZÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s[!?;.,'-_:()"+-]+)$/)){
+          if(!this.commentToPost.match(/^([a-zzáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœA-ZÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ0-9\s[!?;.,'-_:()"+-]+)$/)){
           this.checkedcomment = false
           }else{
             axios

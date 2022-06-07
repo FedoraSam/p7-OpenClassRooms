@@ -43,10 +43,10 @@ export default {
         this.file = event.target.files[0]       
       },
       publishNewArticle: function(){
-        if(!this.title.match(/^([a-zzáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœA-ZÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s[!?;'._:,()"+-]+)$/)){
+        if(!this.title.match(/^([a-zzáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœA-ZÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ0-9\s[!?;'._:,()"+-]+)$/)){
           this.checkedTitle =false
         }
-        if(!this.text.match(/^([a-zzáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœA-ZÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s[!?';._:,()"+-]+)$/)){
+        if(!this.text.match(/^([a-zzáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœA-ZÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ0-9\s[!?';._:,()"+-]+)$/)){
           this.checkedText = false
         }
         else{

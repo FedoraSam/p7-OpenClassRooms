@@ -121,7 +121,7 @@ export default {
             },  
         deleteArticle: function(){   
             axios
-            .delete(`https://localhost:4000/api/user/${this.userLogged}/article/${this.articleId}`, {
+            .delete(`https://backend.thiery-samuel.com/api/user/${this.userLogged}/article/${this.articleId}`, {
             headers: {
             Authorization: 'Bearer '+ localStorage.getItem('token')
                 }
@@ -130,7 +130,7 @@ export default {
         },
         likeArticle: function(choice){
                 axios
-                .post(`https://localhost:4000/api/user/${this.userLogged}/article/${this.articleId}/like`, {like: choice, article: this.articleId, userId: this.userLogged}  , 
+                .post(`https://backend.thiery-samuel.com/api/user/${this.userLogged}/article/${this.articleId}/like`, {like: choice, article: this.articleId, userId: this.userLogged}  , 
                 {
                 headers: {
                 Authorization: 'Bearer '+ localStorage.getItem('token')
@@ -143,7 +143,7 @@ export default {
         },
         refreshComments: function(){
             axios
-            .get(`https://localhost:4000/api/user/${this.userLogged}/article/${this.articleId}/comments`, {
+            .get(`https://backend.thiery-samuel.com/api/user/${this.userLogged}/article/${this.articleId}/comments`, {
                 headers: {
                 Authorization: 'Bearer '+ localStorage.getItem('token')
                 }

@@ -1,6 +1,6 @@
 <template>
 <div>
-    <Aside :userLogged="userLogged" @redactComment="helpRedactArticleStep2"/>
+    <Aside :userLogged="userLogged" />
     <div class="help-article" v-show="helpArticle == true">
         <i class="far fa-arrow-alt-circle-up"></i>
         <span>Cliquez ici</span>
@@ -11,8 +11,10 @@
     </div>
     <div id="help-menu">
         <ul>
-            <li v-on:click="helpRedactArticleStep1">Poster un article</li>
-            <li v-on:click="helpModifyAccount">Modifier son compte</li>
+            <li v-on:click="helpRedactArticleStep1" v-show="helpArticle == false">Poster un article</li>
+            <img src="../images/help-article.png" alt="comment rédiger son article" v-show="helpArticle == true">
+            <p v-show="helpArticle == true">Vous ne pourrez publier votre article que quand le titre et le texte sont présent ainsi qu'une image sélectionnée</p>
+            <li v-on:click="helpModifyAccount" v-show="helpArticle == false">Modifier son compte</li>
         </ul>
        
     </div>
